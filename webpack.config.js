@@ -11,16 +11,21 @@ module.exports = {
         path: __dirname + '/app/dist/',
         filename: 'bundle.js'
     },
+    //http://webpack.github.io/docs/configuration.html#devtool
+    devtool: "#cheap-module-source-map",
+
+    resolve: {
+        root: __dirname + '/app/',
+        extensions: ['', '.js']
+    },
 
     module: {
         loaders: [
             {
-                test: /\.es6.js$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    loose: 'es6.modules,es6.classes,es6.properties.computed'
-                }
+                loader: 'babel-loader?stage=0'
+
             },
             {
                 test: /\.(htm|html)$/,
