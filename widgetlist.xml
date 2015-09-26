@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rsp stat="ok">
-     <list>
-        <widget id="first_app">
-        <title>monster_player</title>
-               <compression size="10000000" type="zip"/>
-               <download>http://172.16.110.43:80/widget/monster_player.zip</download>
-        </widget>
-</list>
