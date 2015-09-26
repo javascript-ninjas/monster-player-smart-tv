@@ -4030,11 +4030,23 @@
 
 	var _routesRoutesModule2 = _interopRequireDefault(_routesRoutesModule);
 
+	var _directivesLoginDirective = __webpack_require__(16);
+
+	var _directivesLoginDirective2 = _interopRequireDefault(_directivesLoginDirective);
+
+	var _directivesIntroDirective = __webpack_require__(20);
+
+	var _directivesIntroDirective2 = _interopRequireDefault(_directivesIntroDirective);
+
+	var _constantsKeycodes = __webpack_require__(18);
+
+	var _constantsKeycodes2 = _interopRequireDefault(_constantsKeycodes);
+
 	// deklaracja modułów i dependancy
 	var moduleName = 'MonsterModule';
 	var deps = ['ui.router', _routesRoutesModule2['default']];
 
-	angular.module(moduleName, deps).controller('MainController', _controllersMainController2['default']); //Register end
+	angular.module(moduleName, deps).controller('MainController', _controllersMainController2['default']).directive('mpLogin', _directivesLoginDirective2['default']).directive('mpIntro', _directivesIntroDirective2['default']).constant('KEYCODES', _constantsKeycodes2['default']); //Register end
 
 	exports['default'] = moduleName;
 	module.exports = exports['default'];
@@ -4056,9 +4068,8 @@
 	["$scope", "$state", function MainController($scope, $state) {
 	    _classCallCheck(this, MainController);
 
-	    console.log('Start');
-	    console.log($state);
-	    $state.go('login');
+	    //Jedziem!
+	    $state.go('intro');
 	}];
 
 	exports['default'] = MainController;
@@ -4097,24 +4108,30 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 	var LoginController =
 	/*@ngInject*/
 	["$scope", "$state", function LoginController($scope, $state) {
 	    _classCallCheck(this, LoginController);
 
-	    $scope.login = {};
+	    $scope.items = [{
+	        type: 'text',
+	        label: 'Login'
+	    }, {
+	        type: 'password',
+	        label: 'Password'
+	    }];
 	}];
 
-	exports["default"] = LoginController;
-	module.exports = exports["default"];
+	exports['default'] = LoginController;
+	module.exports = exports['default'];
 
 /***/ },
 /* 9 */
@@ -4128,6 +4145,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	var _templatesIntroHtml = __webpack_require__(19);
+
+	var _templatesIntroHtml2 = _interopRequireDefault(_templatesIntroHtml);
+
 	var _templatesLoginHtml = __webpack_require__(10);
 
 	var _templatesLoginHtml2 = _interopRequireDefault(_templatesLoginHtml);
@@ -4140,8 +4161,7 @@
 	    $stateProvider.state('intro', {
 	        views: {
 	            'monster': {
-	                template: IntroTemplate,
-	                controller: IntroController
+	                template: _templatesIntroHtml2['default']
 	            }
 	        }
 	    }).state('login', {
@@ -4161,7 +4181,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"input-group input-group-lg\">\n    <span class=\"input-group-addon\" id=\"sizing-addon1\">Login:</span>\n    <input ng-model=\"login.username\" type=\"text\" class=\"form-control\" placeholder=\"Username\">\n</div>\n<div class=\"input-group input-group-lg\">\n    <span class=\"input-group-addon\" id=\"sizing-addon1\">Password:</span>\n    <input ng-model=\"login.password\" type=\"text\" class=\"form-control\" placeholder=\"Password\">\n</div>\n"
+	module.exports = "<mp-login items=\"items\"></mp-login>\n"
 
 /***/ },
 /* 11 */,
@@ -6324,6 +6344,129 @@
 	    });
 	  });
 	})(jQuery);
+
+/***/ },
+/* 14 */,
+/* 15 */,
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _LoginDirectiveHtml = __webpack_require__(17);
+
+	var _LoginDirectiveHtml2 = _interopRequireDefault(_LoginDirectiveHtml);
+
+	var Controller =
+	/*@ngInject*/
+	["$scope", "$element", function Controller($scope, $element) {
+	    _classCallCheck(this, Controller);
+
+	    this.$scope = $scope;
+	}];
+
+	var LoginDirective = /*@ngInject*/function LoginDirective() {
+	    return {
+	        template: _LoginDirectiveHtml2['default'],
+	        restrict: 'E',
+	        scope: {
+	            items: '='
+	        },
+	        controller: Controller
+	    };
+	};
+
+	exports['default'] = LoginDirective;
+	module.exports = exports['default'];
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"input-group input-group-lg\" ng-repeat=\"item in items\">\n    <span class=\"input-group-addon\" id=\"sizing-addon1\">{{ item.label }}:</span>\n    <input type=\"{{ item.type }}\" class=\"form-control\">\n</div>\n"
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var KEYCODES = {
+	    RED: 108,
+	    GREEN: 20,
+	    YELLOW: 21,
+	    BLUE: 22
+	};
+
+	exports['default'] = KEYCODES;
+	module.exports = exports['default'];
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = "<mp-intro></mp-intro>\n"
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _IntroDirectiveHtml = __webpack_require__(21);
+
+	var _IntroDirectiveHtml2 = _interopRequireDefault(_IntroDirectiveHtml);
+
+	var Controller =
+	/*@ngInject*/
+	["$scope", "$state", "KEYCODES", function Controller($scope, $state, KEYCODES) {
+	    _classCallCheck(this, Controller);
+
+	    $scope.$on('keyDown', function ($evt) {
+	        var keyCode = $evt.keyCode;
+	        //$evt.keyCode;
+	        if (keyCode === KEYCODES.RED || keyCode === KEYCODES.BLUE) {
+	            var desiredState = keyCode === KEYCODES.RED ? 'login' : 'signup';
+	            $state.go(desiredState);
+	        }
+	    });
+	}];
+
+	var IntroDirective = /*@ngInject*/function IntroDirective() {
+	    return {
+	        template: _IntroDirectiveHtml2['default'],
+	        restrict: 'E',
+	        controller: Controller
+	    };
+	};
+
+	exports['default'] = IntroDirective;
+	module.exports = exports['default'];
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<h1 class=\"logo\">MONSTER PLAYER</h1>\n<div class=\"login-legend\">\n    <div class=\"login-info\">\n        <div class=\"jumbotron login-button\">\n            <h1>A</h1>\n        </div>\n        <h4 class=\"legend\">Press A to login.</h4>\n    </div>\n    <div class=\"login-info\">\n        <div class=\"jumbotron signup-button\">\n            <h1>D</h1>\n        </div>\n        <h4 class=\"legend\">Press D to sign up.</h4>\n    </div>\n</div>\n"
 
 /***/ }
 /******/ ]);

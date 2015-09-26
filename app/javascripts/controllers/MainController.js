@@ -1,9 +1,8 @@
 class MainController {
     /*@ngInject*/
     constructor($scope, $state) {
-        console.log('Start');
-        console.log($state);
-        $state.go('login');
+        //Jedziem!
+        $state.go('intro');
     }
 }
 

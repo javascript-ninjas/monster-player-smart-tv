@@ -5,3 +5,12 @@ body {
     background-color: #ffffff;
     color: red;
 }
+
+.logo {
+    text-align: center;
+    font-size: 40px;
+}
+
+.login-button {
+    background-color: #E63232;
+}

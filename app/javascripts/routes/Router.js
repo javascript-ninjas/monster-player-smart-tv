@@ -1,5 +1,6 @@
 'use strict';
 
+import IntroTemplate from './templates/intro.html';
 import LoginTemplate from './templates/login.html';
 import LoginController from './controllers/LoginController';
 
@@ -9,7 +10,6 @@ let Router = /*@ngInject*/ ($urlRouterProvider, $stateProvider) => {
             views: {
                 'monster': {
                     template: IntroTemplate,
-                    controller: IntroController
                 }
             }
         })

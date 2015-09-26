@@ -1,8 +1,16 @@
 class LoginController {
     /*@ngInject*/
     constructor($scope, $state) {
-        $scope.login = {};
-
+        $scope.items = [
+            {
+                type: 'text',
+                label: 'Login'
+            },
+            {
+                type: 'password',
+                label: 'Password'
+            }
+        ];
     }
 }
 
